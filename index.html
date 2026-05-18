@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ángeles Style — Moda Alternativa</title>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --parch-light: #f2e8d6;
+      --parch-mid:   #e4d4b8;
+      --parch-dark:  #d0bc9a;
+      --parch-card:  #ecddc8;
+      --ink:         #1a1008;
+      --ink-soft:    #3a2414;
+      --crimson:     #7a1212;
+      --blood:       #8b1a1a;
+      --rose:        #a02828;
+      --gray-ink:    #4a3828;
+      --gray-light:  #8a7060;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--parch-light);
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      cursor: crosshair;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--parch-mid); }
+    ::-webkit-scrollbar-thumb { background: var(--crimson); border-radius: 3px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(to bottom, rgba(242,232,214,0.97) 70%, transparent);
+    }
+    .nav-logo {
+      font-family: 'UnifrakturMaguntia', cursive;
+      font-size: 1.6rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--crimson); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 0 2rem;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 55%, rgba(122,18,18,0.07) 0%, transparent 70%),
+        linear-gradient(160deg, var(--parch-light) 0%, var(--parch-mid) 60%, var(--parch-dark) 100%);
+    }
+    #hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 110% 110% at 50% 50%, transparent 55%, rgba(26,16,8,0.13) 100%);
+      pointer-events: none;
+    }
+
+    .corner { position: absolute; width: 150px; height: 150px; opacity: 0.22; }
+    .corner.tl { top: 80px; left: 20px; }
+    .corner.tr { top: 80px; right: 20px; transform: scaleX(-1); }
+    .corner.bl { bottom: 20px; left: 20px; transform: scaleY(-1); }
+    .corner.br { bottom: 20px; right: 20px; transform: scale(-1); }
+    .corner svg { width: 100%; height: 100%; }
+
+    .hero-inner {
+      position: relative; z-index: 2;
+      text-align: center;
+      animation: fadeUp 1.4s ease both;
+    }
+    .hero-logo-img {
+      width: clamp(180px, 32vw, 300px);
+      filter: drop-shadow(0 4px 20px rgba(122,18,18,0.2)) drop-shadow(0 8px 40px rgba(26,16,8,0.1));
+      animation: floatLogo 6s ease-in-out infinite;
+      margin-bottom: 1.5rem;
+    }
+    @keyframes floatLogo {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+    .hero-title {
+      font-family: 'UnifrakturMaguntia', cursive;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1;
+      color: var(--ink);
+      text-shadow: 2px 2px 0 rgba(122,18,18,0.15);
+      letter-spacing: 4px;
+    }
+    .hero-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.6rem, 1.4vw, 0.82rem);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin: 0.8rem 0 1.5rem;
+    }
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: var(--ink-soft);
+      opacity: 0.8;
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+    }
+    .btn-primary {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--parch-light);
+      background: var(--crimson);
+      text-decoration: none;
+      padding: 0.9rem 2.5rem;
+      border: 1px solid var(--blood);
+      transition: all 0.35s;
+    }
+    .btn-primary:hover {
+      background: var(--blood);
+      box-shadow: 0 4px 20px rgba(122,18,18,0.3);
+    }
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      opacity: 0.35; animation: bounce 2.2s ease-in-out infinite;
+      font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--crimson);
+    }
+    .scroll-hint::after {
+      content: '';
+      display: block; width: 1px; height: 45px;
+      background: linear-gradient(to bottom, var(--crimson), transparent);
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* DIVIDER */
+    .divider {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem; padding: 2.5rem 3rem;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; max-width: 220px; height: 1px;
+    }
+    .divider::before { background: linear-gradient(to right, transparent, var(--crimson)); }
+    .divider::after  { background: linear-gradient(to left, transparent, var(--crimson)); }
+    .divider-sym { color: var(--crimson); font-size: 1.1rem; opacity: 0.65; }
+
+    /* CATÁLOGO */
+    #catalogo {
+      padding: 3rem 2rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--crimson);
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'UnifrakturMaguntia', cursive;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--ink);
+    }
+
+    .filter-bar {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 0.6rem; margin-bottom: 3rem;
+    }
+< truncated lines 211-380 >
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .corner { width: 90px; height: 90px; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      .product-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">Ángeles Style</a>
+    <ul class="nav-links">
+      <li><a href="#hero">Inicio</a></li>
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="corner tl">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 5 L5 45 M5 5 L45 5" stroke="#7a1212" stroke-width="1.5"/>
+        <circle cx="5" cy="5" r="3" fill="#7a1212"/>
+        <path d="M18 5 Q35 5 35 22 Q35 40 52 40" stroke="#7a1212" stroke-width="0.7" fill="none"/>
+        <path d="M5 18 Q5 35 22 35 Q40 35 40 52" stroke="#7a1212" stroke-width="0.7" fill="none"/>
+        <circle cx="45" cy="5" r="2" fill="#7a1212" opacity="0.4"/>
+        <circle cx="5" cy="45" r="2" fill="#7a1212" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="corner tr">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 5 L5 45 M5 5 L45 5" stroke="#7a1212" stroke-width="1.5"/>
+        <circle cx="5" cy="5" r="3" fill="#7a1212"/>
+        <path d="M18 5 Q35 5 35 22 Q35 40 52 40" stroke="#7a1212" stroke-width="0.7" fill="none"/>
+        <path d="M5 18 Q5 35 22 35 Q40 35 40 52" stroke="#7a1212" stroke-width="0.7" fill="none"/>
+      </svg>
+    </div>
+    <div class="corner bl">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 5 L5 45 M5 5 L45 5" stroke="#7a1212" stroke-width="1.5"/>
+        <circle cx="5" cy="5" r="3" fill="#7a1212"/>
+        <path d="M18 5 Q35 5 35 22 Q35 40 52 40" stroke="#7a1212" stroke-width="0.7" fill="none"/>
+        <path d="M5 18 Q5 35 22 35 Q40 35 40 52" stroke="#7a1212" stroke-width="0.7" fill="none"/>
+      </svg>
+    </div>
+    <div class="corner br">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 5 L5 45 M5 5 L45 5" stroke="#7a1212" stroke-width="1.5"/>
+        <circle cx="5" cy="5" r="3" fill="#7a1212"/>
+        <path d="M18 5 Q35 5 35 22 Q35 40 52 40" stroke="#7a1212" stroke-width="0.7" fill="none"/>
+        <path d="M5 18 Q5 35 22 35 Q40 35 40 52" stroke="#7a1212" stroke-width="0.7" fill="none"/>
+      </svg>
+    </div>
+
+    <div class="hero-inner">
+      <img src="21244.jpg" alt="Ángeles Style Logo" class="hero-logo-img" onerror="this.style.display='none'"/>
+      <h1 class="hero-title">Ángeles Style</h1>
+      <p class="hero-subtitle">✦ Moda Alternativa ✦</p>
+      <p class="hero-tagline">Prendas para quienes abrazan la oscuridad con elegancia</p>
+      <a href="#catalogo" class="btn-primary">Ver Catálogo</a>
+    </div>
+    <div class="scroll-hint">Descubrir</div>
+  </section>
+
+  <div class="divider"><span class="divider-sym">✞</span></div>
+
+  <section id="catalogo">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">✦ Colección ✦</span>
+      <h2 class="section-title">Nuestro Catálogo</h2>
+    </div>
+
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">Todo</button>
+      <button class="filter-btn" data-filter="tops">Tops</button>
+      <button class="filter-btn" data-filter="vestidos">Vestidos</button>
+      <button class="filter-btn" data-filter="pantalones">Pantalones</button>
+      <button class="filter-btn" data-filter="accesorios">Accesorios</button>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card reveal" data-cat="vestidos">
+        <div class="product-img-wrap">
+          <div class="placeholder" style="background:linear-gradient(135deg,#ddd0b8,#c8b898);">🦇</div>
+        </div>
+        <div class="product-overlay">
+          <span class="product-category">Vestidos</span>
+          <div class="product-name">Vestido Nocturna</div>
+          <div class="product-desc">Encaje negro con detalles de terciopelo</div>
+          <span class="product-tag">Nuevo</span>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-cat="tops">
+        <div class="product-img-wrap">
+          <div class="placeholder" style="background:linear-gradient(135deg,#d8ccb8,#c8baa0);">🌹</div>
+        </div>
+        <div class="product-overlay">
+          <span class="product-category">Tops</span>
+          <div class="product-name">Corset Oscuro</div>
+          <div class="product-desc">Satén con bordado de rosas carmesí</div>
+          <span class="product-tag">Favorito</span>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-cat="pantalones">
+        <div class="product-img-wrap">
+          <div class="placeholder" style="background:linear-gradient(135deg,#e0d4bc,#ccc0a4);">⛓️</div>
+        </div>
+        <div class="product-overlay">
+          <span class="product-category">Pantalones</span>
+          <div class="product-name">Pantalón Cadenas</div>
+          <div class="product-desc">Corte recto con cadenas decorativas</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-cat="vestidos">
+        <div class="product-img-wrap">
+          <div class="placeholder" style="background:linear-gradient(135deg,#d4c8b0,#bfb090);">🕊️</div>
+        </div>
+        <div class="product-overlay">
+          <span class="product-category">Vestidos</span>
+          <div class="product-name">Vestido Ángel Caído</div>
+          <div class="product-desc">Vuelo asimétrico en gasa oscura</div>
+          <span class="product-tag">Exclusivo</span>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-cat="accesorios">
+        <div class="product-img-wrap">
+          <div class="placeholder" style="background:linear-gradient(135deg,#ddd0b8,#c8b898);">🌙</div>
+        </div>
+        <div class="product-overlay">
+          <span class="product-category">Accesorios</span>
+          <div class="product-name">Collar de Perlas Gótico</div>
+          <div class="product-desc">Perlas negras con dije de cruz</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-cat="tops">
+        <div class="product-img-wrap">
+          <div class="placeholder" style="background:linear-gradient(135deg,#e0d4bc,#d0c4a8);">✝️</div>
+        </div>
+        <div class="product-overlay">
+          <span class="product-category">Tops</span>
+          <div class="product-name">Blusa Victoriana</div>
+          <div class="product-desc">Manga acampanada, cuello de encaje</div>
+          <span class="product-tag">Nuevo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact-band" id="contacto">
+    <div class="contact-band-inner reveal">
+      <h2>¿Te enamoraste de algo?</h2>
+      <p>Escríbenos por WhatsApp para más información, tallas y disponibilidad. Con gusto te atendemos 🖤</p>
+      <a href="https://wa.me/902875037?text=Hola%2C%20me%20interesa%20un%20producto%20de%20%C3%81ngeles%20Style%20%F0%9F%96%A4"
+         class="btn-primary" target="_blank" rel="noopener">
+        Escribir por WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-logo">Ángeles Style</span>
+    <p class="footer-tagline">Moda alternativa con alma</p>
+    <div class="footer-divider"></div>
+    <div class="footer-socials">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="https://wa.me/902875037" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="#">TikTok</a>
+    </div>
+    <p class="footer-copy">© 2026 Ángeles Style · Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 90);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.product-card').forEach(card => {
+          card.style.display = (f === 'all' || card.dataset.cat === f) ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
